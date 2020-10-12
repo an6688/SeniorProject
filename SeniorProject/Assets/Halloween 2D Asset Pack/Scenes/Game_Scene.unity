@@ -2191,7 +2191,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546333091}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.129, y: 0.29, z: 0}
+  m_LocalPosition: {x: -12.21, y: 0.29, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.5}
   m_Children:
   - {fileID: 1412319032}
@@ -2242,6 +2242,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
+  airControl: 0
   jumpForce: 400
 --- !u!4 &565885300 stripped
 Transform:
@@ -4030,7 +4031,7 @@ PrefabInstance:
     - target: {fileID: 212339702700978462, guid: 08becd4e571ddb44aa7d0f7df77cce9e,
         type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212392600924574298, guid: 08becd4e571ddb44aa7d0f7df77cce9e,
         type: 3}
@@ -4040,7 +4041,7 @@ PrefabInstance:
     - target: {fileID: 212485993938784532, guid: 08becd4e571ddb44aa7d0f7df77cce9e,
         type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 212697557304998116, guid: 08becd4e571ddb44aa7d0f7df77cce9e,
         type: 3}
@@ -4050,7 +4051,7 @@ PrefabInstance:
     - target: {fileID: 212906870948695458, guid: 08becd4e571ddb44aa7d0f7df77cce9e,
         type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08becd4e571ddb44aa7d0f7df77cce9e, type: 3}

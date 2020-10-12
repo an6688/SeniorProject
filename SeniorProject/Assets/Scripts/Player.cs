@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
         facingRight = true;
         _myRigidbody2D = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myAnimator.GetComponent<Rigidbody>().useGravity = false;
+
     }
 
 
