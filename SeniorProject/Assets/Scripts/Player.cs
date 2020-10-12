@@ -13,9 +13,26 @@ public class Player : MonoBehaviour
 
     private bool facingRight;
 
-    private bool attack;
+    [SerializeField]
+    private Transform[] groundPoints;
 
-    private bool walk;
+    [SerializeField]
+    private float groundRadius;
+
+    [SerializeField]
+    private LayerMask whatIsGround;
+
+    private bool isGrounded;
+
+    private bool jump;
+
+    [SerializeField]
+    private bool airControl;
+
+    [SerializeField]
+    private float jumpForce;
+
+    private bool attack;
 
     private bool run; 
 
@@ -31,6 +48,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         HandleInput();
+        
     }
 
     // fixed Update is called once per frame
@@ -38,41 +56,40 @@ public class Player : MonoBehaviour
     {
         float horizontal = Input.GetAxis("Horizontal");
 
+        isGrounded = IsGrounded();
+
         HandleMovement(horizontal);
 
         Flip(horizontal);
 
+        HandleInput();
+
         HandleAttacks();
+
+        HandleRun();
 
         ResetValues();
     }
 
     private void HandleMovement(float horizontal)
     {
-        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        if (isGrounded && jump)
+        {
+            isGrounded = false;
+            _myRigidbody2D.AddForce(new Vector2(0, jumpForce));
+        }
+
+        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
+        {
+            _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
+        }
+
+        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
         {
             _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
         }
 
         myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
-
-        if (walk && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Walk"))
-        {
-            myAnimator.SetBool("walk", true);
-        }
-        else if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("walk"))
-        {
-            myAnimator.SetBool("walk", false);
-        }
-
-        if (run && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
-        {
-            myAnimator.SetBool("run", true);
-        }
-        else if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsName("run"))
-        {
-            myAnimator.SetBool("run", false);
-        }
     }
 
     private void HandleAttacks() // for jump attack later, thats why it is attackS
@@ -80,22 +97,35 @@ public class Player : MonoBehaviour
         if (attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
             myAnimator.SetTrigger("attack");
-            _myRigidbody2D.velocity = Vector2.zero; 
+            _myRigidbody2D.velocity = Vector2.zero;
+        }
+    }
+
+    private void HandleRun()
+    {
+        if (run && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+        {
+            myAnimator.SetTrigger("run");
+            _myRigidbody2D.velocity = Vector2.zero;
         }
     }
 
     private void HandleInput() // handleinput() for attacking and jumping etc 
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            jump = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
             attack = true; 
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             run = true; 
         }
-
     }
 
     private void Flip(float horizontal)
@@ -115,6 +145,27 @@ public class Player : MonoBehaviour
     {
         // resets player condition back to idle
         attack = false;
-        walk = false; 
+        run = false;
+        jump = false; 
+    }
+
+    private bool IsGrounded()
+    {
+        if (_myRigidbody2D.velocity.y <= 0)
+        {
+            foreach (Transform point in groundPoints)
+            {
+                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
+
+                for (int i = 0; i < colliders.Length; i++)
+                {
+                    if (colliders[i].gameObject != gameObject)
+                    {
+                        return true; 
+                    }
+                }
+            }
+        }
+        return false; 
     }
 }
