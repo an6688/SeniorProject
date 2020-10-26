@@ -1323,11 +1323,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4422271423069056, guid: 733723fa004515340b2ab918ad86bb74, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.02
+      value: -7.32
       objectReference: {fileID: 0}
     - target: {fileID: 4422271423069056, guid: 733723fa004515340b2ab918ad86bb74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.58
+      value: 3.16
       objectReference: {fileID: 0}
     - target: {fileID: 4422271423069056, guid: 733723fa004515340b2ab918ad86bb74, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1897,11 +1897,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4083667107513382, guid: cfa56ee81e71ef14a956e5afcaf90133, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.28
+      value: -5.74
       objectReference: {fileID: 0}
     - target: {fileID: 4083667107513382, guid: cfa56ee81e71ef14a956e5afcaf90133, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.72
+      value: 4.67
       objectReference: {fileID: 0}
     - target: {fileID: 4083667107513382, guid: cfa56ee81e71ef14a956e5afcaf90133, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4669,7 +4669,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1348739780}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &1390587981
+--- !u!61 &1390587983
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
