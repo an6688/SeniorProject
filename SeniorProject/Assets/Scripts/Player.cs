@@ -6,12 +6,12 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D _myRigidbody2D;
 
-    private Animator myAnimator;
+    private Animator myAnimator; // in Character.cs
 
     [SerializeField]
-    private float movementSpeed;
+    private float movementSpeed; // in Character.cs 
 
-    private bool facingRight;
+    private bool facingRight; // in Character.cs
 
     [SerializeField]
     private Transform[] groundPoints;
