@@ -244,9 +244,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 280297446}
     m_Modifications:
+    - target: {fileID: 1959118857644296, guid: 8bb981e920c37f945af623d1afbac1b2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4313967769746522, guid: 8bb981e920c37f945af623d1afbac1b2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 39.04
+      value: 38.21
       objectReference: {fileID: 0}
     - target: {fileID: 4313967769746522, guid: 8bb981e920c37f945af623d1afbac1b2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2339,6 +2343,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f96db2109295d4fb367911798309c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knifePosition: {fileID: 0}
+  knifePrefab: {fileID: 0}
   movementSpeed: 4
   groundPoints:
   - {fileID: 1412319032}

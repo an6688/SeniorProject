@@ -1,196 +1,200 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
-public class Player : MonoBehaviour
-{
-    private Rigidbody2D _myRigidbody2D;
 
-    private Animator myAnimator; // in Character.cs
+    public class Player : Character // using inheritence to give functionality from one to another
+    {
+        // private Rigidbody2D _myRigidbody2D;
+
+        /*private Animator myAnimator; // in Character.cs
 
     [SerializeField]
     private float movementSpeed; // in Character.cs 
 
-    private bool facingRight; // in Character.cs
+    private bool facingRight; // in Character.cs*/
 
-    [SerializeField]
-    private Transform[] groundPoints;
+        [SerializeField] private Transform[] groundPoints;
 
-    [SerializeField]
-    private float groundRadius;
+        [SerializeField] private float groundRadius;
 
-    [SerializeField]
-    private LayerMask whatIsGround;
+        [SerializeField] private LayerMask whatIsGround;
 
-    private bool isGrounded;
+        [SerializeField] private bool airControl;
 
-    private bool jump;
+        [SerializeField] private float jumpForce;
 
-    [SerializeField]
-    private bool airControl;
+        // private bool attack; // in character.cs
 
-    [SerializeField]
-    private float jumpForce;
+        private bool isGrounded;
 
-    private bool attack;
+        private bool jump;
 
-    private bool run; 
+        private bool run;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        facingRight = true;
-        _myRigidbody2D = GetComponent<Rigidbody2D>();
-        myAnimator = GetComponent<Animator>();
-        myAnimator.GetComponent<Rigidbody>().useGravity = false;
+        public Rigidbody2D _myRigidbody2D { get; set; }
 
-    }
+        private Vector2 startPos;
 
 
-    void Update()
-    {
-        HandleInput();
+        // Start is called before the first frame update
+        public override void Start()
+        {
+            //facingRight = true; // in character.cs
+            Debug.Log("PlayerStart: ");
+            base.Start();
+
+            startPos = transform.position;
+            _myRigidbody2D = GetComponent<Rigidbody2D>();
+            // myAnimator = GetComponent<Animator>(); // in character.cs
+            //myAnimator.GetComponent<Rigidbody>().useGravity = false;
+        }
+
+
+        void Update()
+        {
+            HandleInput();
         
-    }
-
-    // fixed Update is called once per frame
-    void FixedUpdate() // this function runs a fixed amount of times based on time step 
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-
-        isGrounded = IsGrounded();
-
-        HandleMovement(horizontal);
-
-        Flip(horizontal);
-
-        HandleInput();
-
-        HandleAttacks();
-
-        HandleLayers();
-
-        HandleRun();
-
-        ResetValues();
-    }
-
-    private void HandleMovement(float horizontal)
-    {
-        if (_myRigidbody2D.velocity.y < 0)
-        {
-            myAnimator.SetBool("land", true);
-        }
-        if (isGrounded && jump)
-        {
-            isGrounded = false;
-            _myRigidbody2D.AddForce(new Vector2(0, jumpForce));
-            myAnimator.SetTrigger("jump");
         }
 
-        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
+        // fixed Update is called once per frame
+        void FixedUpdate() // this function runs a fixed amount of times based on time step 
         {
-            _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
+            float horizontal = Input.GetAxis("Horizontal");
+
+            isGrounded = IsGrounded();
+
+            HandleMovement(horizontal);
+
+            Flip(horizontal);
+
+            HandleInput();
+
+            HandleAttacks();
+
+            HandleLayers();
+
+            HandleRun();
+
+            ResetValues();
         }
 
-        if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+        private void HandleMovement(float horizontal)
         {
-            _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
+            if (_myRigidbody2D.velocity.y < 0)
+            {
+                myAnimator.SetBool("land", true);
+            }
+            if (isGrounded && jump)
+            {
+                isGrounded = false;
+                _myRigidbody2D.AddForce(new Vector2(0, jumpForce));
+                myAnimator.SetTrigger("jump");
+            }
+
+            if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
+            {
+                _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
+            }
+
+            if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+            {
+                _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
+            }
+
+            myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
         }
 
-        myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
-    }
-
-    private void HandleAttacks() // for jump attack later, thats why it is attackS
-    {
-        if (attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        private void HandleAttacks() // for jump attack later, thats why it is attackS
         {
-            myAnimator.SetTrigger("attack");
-            _myRigidbody2D.velocity = Vector2.zero;
-        }
-    }
-
-    private void HandleRun()
-    {
-        if (run && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
-        {
-            myAnimator.SetTrigger("run");
-            _myRigidbody2D.velocity = Vector2.zero;
-        }
-    }
-
-    private void HandleInput() // handleinput() for attacking and jumping etc 
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            jump = true;
+            if (Attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            {
+                myAnimator.SetTrigger("attack");
+                _myRigidbody2D.velocity = Vector2.zero;
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.RightShift))
+        private void HandleRun()
         {
-            attack = true; 
+            if (run && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+            {
+                myAnimator.SetTrigger("run");
+                _myRigidbody2D.velocity = Vector2.zero;
+            }
         }
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        private void HandleInput() // handleinput() for attacking and jumping etc 
         {
-            run = true; 
-        }
-    }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                jump = true;
+            }
 
-    private void Flip(float horizontal)
-    {
-        if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+            if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                Attack = true; 
+            }
+
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                run = true; 
+            }
+        }
+
+        private void Flip(float horizontal)
         {
-            facingRight = !facingRight;
+            if (horizontal > 0 && !facingRight || horizontal < 0 && facingRight)
+            {
+                /*facingRight = !facingRight;
 
             Vector3 playerScale = transform.localScale;
             playerScale.x *= -1;
 
-            transform.localScale = playerScale; 
+            transform.localScale = playerScale; */
+                ChangeDirection(); 
+            }
         }
-    }
 
-    private void ResetValues()
-    {
-        // resets player condition back to idle
-        attack = false;
-        run = false;
-        jump = false; 
-    }
-
-    private bool IsGrounded()
-    {
-        if (_myRigidbody2D.velocity.y <= 0)
+        private void ResetValues()
         {
-            foreach (Transform point in groundPoints)
-            {
-                Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
+            // resets player condition back to idle
+            Attack = false;
+            run = false;
+            jump = false; 
+        }
 
-                for (int i = 0; i < colliders.Length; i++)
+        private bool IsGrounded()
+        {
+            if (_myRigidbody2D.velocity.y <= 0)
+            {
+                foreach (Transform point in groundPoints)
                 {
-                    if (colliders[i].gameObject != gameObject)
+                    Collider2D[] colliders = Physics2D.OverlapCircleAll(point.position, groundRadius, whatIsGround);
+
+                    for (int i = 0; i < colliders.Length; i++)
                     {
-                        myAnimator.ResetTrigger("jump");
-                        myAnimator.SetBool("land", false);
-                        return true; 
+                        if (colliders[i].gameObject != gameObject)
+                        {
+                            myAnimator.ResetTrigger("jump");
+                            myAnimator.SetBool("land", false);
+                            return true; 
+                        }
                     }
                 }
             }
+            return false; 
         }
-        return false; 
-    }
 
-    private void HandleLayers()
-    {
-        if (!isGrounded)
+        private void HandleLayers()
         {
-            myAnimator.SetLayerWeight(1,1);
-        }
-        else
-        {
+            if (!isGrounded)
             {
-                myAnimator.SetLayerWeight(1, 0);
+                myAnimator.SetLayerWeight(1,1);
+            }
+            else
+            {
+                {
+                    myAnimator.SetLayerWeight(1, 0);
+                }
             }
         }
     }
-}
