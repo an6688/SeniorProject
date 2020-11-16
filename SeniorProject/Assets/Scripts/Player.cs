@@ -25,26 +25,30 @@ using System.Collections;
 
         // private bool attack; // in character.cs
 
-        private bool isGrounded;
+        // private bool isGrounded;
 
-        private bool jump;
+        // private bool jump;
 
         private bool run;
-
-        public Rigidbody2D _myRigidbody2D { get; set; }
-
+    
         private Vector2 startPos;
 
+        public Rigidbody2D MyRigidBody { get; set; }
 
-        // Start is called before the first frame update
-        public override void Start()
+        public bool Attack { get; set; }
+        public bool Jump { get; set; }
+
+        public bool OnGround { get; set; }
+
+    // Start is called before the first frame update
+    public override void Start()
         {
             //facingRight = true; // in character.cs
             // Debug.Log("PlayerStart: ");
             base.Start();
 
             startPos = transform.position;
-            _myRigidbody2D = GetComponent<Rigidbody2D>();
+            MyRigidBody = GetComponent<Rigidbody2D>();
             // myAnimator = GetComponent<Animator>(); // in character.cs
             //myAnimator.GetComponent<Rigidbody>().useGravity = false;
         }
@@ -61,7 +65,8 @@ using System.Collections;
         {
             float horizontal = Input.GetAxis("Horizontal");
 
-            isGrounded = IsGrounded();
+            // isGrounded = IsGrounded();
+            OnGround = IsGrounded();
 
             HandleMovement(horizontal);
 
@@ -69,18 +74,18 @@ using System.Collections;
 
             HandleInput();
 
-            HandleAttacks();
+            // HandleAttacks();
 
             HandleLayers();
 
             HandleRun();
 
-            ResetValues();
+            // ResetValues();
         }
 
         private void HandleMovement(float horizontal)
         {
-            if (_myRigidbody2D.velocity.y < 0)
+            /*if (_myRigidbody2D.velocity.y < 0)
             {
                 MyAnimator.SetBool("land", true);
             }
@@ -101,24 +106,40 @@ using System.Collections;
                 _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
             }
 
+            MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));*/
+
+            if (MyRigidBody.velocity.y < 0)
+            {
+                MyAnimator.SetBool("land", true);
+            }
+
+            if (!Attack && (OnGround || airControl))
+            {
+                MyRigidBody.velocity = new Vector2(horizontal * movementSpeed, MyAnimator.velocity.y);
+            }
+
+            if (Jump && MyRigidBody.velocity.y == 0)
+            {
+                MyRigidBody.AddForce(new Vector2(0, jumpForce));
+            }
             MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
         }
 
-        private void HandleAttacks() // for jump attack later, thats why it is attackS
-        {
-            if (Attack && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-            {
-                MyAnimator.SetTrigger("attack");
-                _myRigidbody2D.velocity = Vector2.zero;
-            }
-        }
+        //private void HandleAttacks() // for jump attack later, thats why it is attackS
+        //{
+        //    if (Attack && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        //    {
+        //        MyAnimator.SetTrigger("attack");
+        //        _myRigidbody2D.velocity = Vector2.zero;
+        //    }
+        //}
 
         private void HandleRun()
         {
             if (run && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
             {
                 MyAnimator.SetTrigger("run");
-                _myRigidbody2D.velocity = Vector2.zero;
+                MyRigidBody.velocity = Vector2.zero;
             }
         }
 
@@ -126,17 +147,17 @@ using System.Collections;
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                jump = true;
+                // jump = true;
             }
 
             if (Input.GetKeyDown(KeyCode.RightShift))
             {
-                Attack = true; 
+                // Attack = true; 
             }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                run = true; 
+                // run = true; 
             }
         }
 
@@ -154,17 +175,17 @@ using System.Collections;
             }
         }
 
-        private void ResetValues()
-        {
-            // resets player condition back to idle
-            Attack = false;
-            run = false;
-            jump = false; 
-        }
+        //private void ResetValues()
+        //{
+        //    // resets player condition back to idle
+        //    Attack = false;
+        //    run = false;
+        //    jump = false; 
+        //}
 
         private bool IsGrounded()
         {
-            if (_myRigidbody2D.velocity.y <= 0)
+            if (MyRigidBody.velocity.y <= 0)
             {
                 foreach (Transform point in groundPoints)
                 {
@@ -174,8 +195,8 @@ using System.Collections;
                     {
                         if (colliders[i].gameObject != gameObject)
                         {
-                            MyAnimator.ResetTrigger("jump");
-                            MyAnimator.SetBool("land", false);
+                            // MyAnimator.ResetTrigger("jump");
+                            // MyAnimator.SetBool("land", false);
                             return true; 
                         }
                     }
@@ -186,7 +207,7 @@ using System.Collections;
 
         private void HandleLayers()
         {
-            if (!isGrounded)
+            if (!OnGround)
             {
                 MyAnimator.SetLayerWeight(1,1);
             }
