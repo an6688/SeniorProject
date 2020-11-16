@@ -8,7 +8,7 @@ using System.Collections;
 
         /*private Animator myAnimator; // in Character.cs
 
-    [SerializeField]
+    [SerializeField]f
     private float movementSpeed; // in Character.cs 
 
     private bool facingRight; // in Character.cs*/
@@ -40,7 +40,7 @@ using System.Collections;
         public override void Start()
         {
             //facingRight = true; // in character.cs
-            Debug.Log("PlayerStart: ");
+            // Debug.Log("PlayerStart: ");
             base.Start();
 
             startPos = transform.position;
@@ -82,42 +82,42 @@ using System.Collections;
         {
             if (_myRigidbody2D.velocity.y < 0)
             {
-                myAnimator.SetBool("land", true);
+                MyAnimator.SetBool("land", true);
             }
             if (isGrounded && jump)
             {
                 isGrounded = false;
                 _myRigidbody2D.AddForce(new Vector2(0, jumpForce));
-                myAnimator.SetTrigger("jump");
+                MyAnimator.SetTrigger("jump");
             }
 
-            if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
+            if (!this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
             {
                 _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
             }
 
-            if (!this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+            if (!this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
             {
                 _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
             }
 
-            myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+            MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
         }
 
         private void HandleAttacks() // for jump attack later, thats why it is attackS
         {
-            if (Attack && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            if (Attack && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                myAnimator.SetTrigger("attack");
+                MyAnimator.SetTrigger("attack");
                 _myRigidbody2D.velocity = Vector2.zero;
             }
         }
 
         private void HandleRun()
         {
-            if (run && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+            if (run && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
             {
-                myAnimator.SetTrigger("run");
+                MyAnimator.SetTrigger("run");
                 _myRigidbody2D.velocity = Vector2.zero;
             }
         }
@@ -174,8 +174,8 @@ using System.Collections;
                     {
                         if (colliders[i].gameObject != gameObject)
                         {
-                            myAnimator.ResetTrigger("jump");
-                            myAnimator.SetBool("land", false);
+                            MyAnimator.ResetTrigger("jump");
+                            MyAnimator.SetBool("land", false);
                             return true; 
                         }
                     }
@@ -188,12 +188,12 @@ using System.Collections;
         {
             if (!isGrounded)
             {
-                myAnimator.SetLayerWeight(1,1);
+                MyAnimator.SetLayerWeight(1,1);
             }
             else
             {
                 {
-                    myAnimator.SetLayerWeight(1, 0);
+                    MyAnimator.SetLayerWeight(1, 0);
                 }
             }
         }

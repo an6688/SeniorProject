@@ -6,7 +6,9 @@ public abstract class Character : MonoBehaviour
 {
     // Character is a super class that works for both the player and enemy
 
-    protected Animator myAnimator; // protected means it can be accessed by the class itself and anything inheriting from it 
+    [SerializeField] public Animator MyAnimator { get; private set; } 
+
+    // public Animator MyAnimator { get; set; }
 
     [SerializeField] private Transform knifePosition; // knifeposition is a place holder variable for now, enemies may throw objects
 
@@ -21,9 +23,9 @@ public abstract class Character : MonoBehaviour
     // Start is called before the first frame update
     public virtual void Start()
     {
-        Debug.Log("CharStart: ");
+        // Debug.Log("CharStart: ");
         facingRight = true;
-        myAnimator = GetComponent<Animator>();
+        MyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
