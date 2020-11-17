@@ -6,26 +6,26 @@ public abstract class Character : MonoBehaviour
 {
     // Character is a super class that works for both the player and enemy
 
-    [SerializeField] public Animator MyAnimator { get; private set; } 
+    [SerializeField] public Animator myAnimator { get; private set; }
 
     // public Animator MyAnimator { get; set; }
 
-    [SerializeField] private Transform knifePosition; // knifeposition is a place holder variable for now, enemies may throw objects
+    // knifeposition is a place holder variable for now, enemies may throw objects [SerializeField] private Transform knifePosition; 
 
-    [SerializeField] private GameObject knifePrefab; // placeholder for enemies throwing object
+    // placeholder for enemies throwing object [SerializeField] private GameObject knifePrefab; 
 
     [SerializeField] protected float movementSpeed;
 
     protected bool facingRight;
 
-    protected bool Attack { get; set; }
+    public bool Attack { get; set; }
 
     // Start is called before the first frame update
     public virtual void Start()
     {
-        // Debug.Log("CharStart: ");
+        Debug.Log("CharStart: ");
         facingRight = true;
-        MyAnimator = GetComponent<Animator>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame

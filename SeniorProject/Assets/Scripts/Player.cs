@@ -13,6 +13,21 @@ using System.Collections;
 
     private bool facingRight; // in Character.cs*/
 
+        private static Player instance;
+
+        public static Player Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = GameObject.FindObjectOfType<Player>(); // from video 14.2. this is a singleton pattern. this works with only 1 player in a game. you cant use a singleton pattern if theres more than 1 player in a game, singleton works on one object at a time. 
+                }
+
+                return instance; 
+            }
+        }
+
         [SerializeField] private Transform[] groundPoints;
 
         [SerializeField] private float groundRadius;
@@ -30,17 +45,18 @@ using System.Collections;
         // private bool jump;
 
         private bool run;
-    
-        private Vector2 startPos;
-
+        
         public Rigidbody2D MyRigidBody { get; set; }
 
-        public bool Attack { get; set; }
         public bool Jump { get; set; }
+        public bool Run { get; set; }
 
         public bool OnGround { get; set; }
 
-    // Start is called before the first frame update
+        private Vector2 startPos;
+
+
+        // Start is called before the first frame update
     public override void Start()
         {
             //facingRight = true; // in character.cs
@@ -56,6 +72,12 @@ using System.Collections;
 
         void Update()
         {
+            if (transform.position.y <= -14f)
+            {
+                MyRigidBody.velocity = Vector2.zero;
+                transform.position = startPos;
+            }
+
             HandleInput();
         
         }
@@ -110,19 +132,19 @@ using System.Collections;
 
             if (MyRigidBody.velocity.y < 0)
             {
-                MyAnimator.SetBool("land", true);
+                myAnimator.SetBool("land", true);
             }
 
             if (!Attack && (OnGround || airControl))
             {
-                MyRigidBody.velocity = new Vector2(horizontal * movementSpeed, MyAnimator.velocity.y);
+                MyRigidBody.velocity = new Vector2(horizontal * movementSpeed, MyRigidBody.velocity.y);
             }
 
             if (Jump && MyRigidBody.velocity.y == 0)
             {
                 MyRigidBody.AddForce(new Vector2(0, jumpForce));
             }
-            MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+            myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
         }
 
         //private void HandleAttacks() // for jump attack later, thats why it is attackS
@@ -136,9 +158,9 @@ using System.Collections;
 
         private void HandleRun()
         {
-            if (run && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+            if (run && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
             {
-                MyAnimator.SetTrigger("run");
+                myAnimator.SetTrigger("run");
                 MyRigidBody.velocity = Vector2.zero;
             }
         }
@@ -148,16 +170,19 @@ using System.Collections;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 // jump = true;
+                myAnimator.SetTrigger("jump");
             }
 
             if (Input.GetKeyDown(KeyCode.RightShift))
             {
                 // Attack = true; 
+                myAnimator.SetTrigger("attack");
             }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 // run = true; 
+                myAnimator.SetTrigger("run");
             }
         }
 
@@ -209,12 +234,12 @@ using System.Collections;
         {
             if (!OnGround)
             {
-                MyAnimator.SetLayerWeight(1,1);
+                myAnimator.SetLayerWeight(1,1);
             }
             else
             {
                 {
-                    MyAnimator.SetLayerWeight(1, 0);
+                    myAnimator.SetLayerWeight(1, 0);
                 }
             }
         }

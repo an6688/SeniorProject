@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class IdleState : IEnemyState
 {
-    public Enemy enemy;
+    [SerializeField] public Enemy enemy;
 
     private float idleTimer;
 
@@ -32,15 +32,16 @@ public class IdleState : IEnemyState
         throw new System.NotImplementedException();
     }
 
-    private void Idle()
+    public virtual void Idle()
     {
-        enemy.MyAnimator.SetFloat("speed", 1);
+        if (enemy != null) enemy.myAnimator.SetFloat("speed", 1);
+        
         
         idleTimer += Time.deltaTime; // delta time represents the time passed since the last time a frame was rendered 
 
         if (idleTimer >= idleDuration)
         {
-            enemy.ChangeState(new PatrolState());   
+            if (enemy != null) enemy.ChangeState(new PatrolState());
         }
     }
 }

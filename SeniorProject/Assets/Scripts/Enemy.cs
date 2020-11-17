@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    private IEnemyState currentState;
+    [SerializeField] private IEnemyState currentState;
 
     // Start is called before the first frame update
     public override void Start()
@@ -16,7 +16,7 @@ public class Enemy : Character
     // Update is called once per frame
     void Update()
     {
-        currentState.Execute();
+        if (currentState != null) currentState.Execute();
     }
 
     public void ChangeState(IEnemyState newState)
@@ -35,7 +35,7 @@ public class Enemy : Character
 
     public void Move()
     {
-        MyAnimator.SetFloat("speed", 1);
+        myAnimator.SetFloat("speed", 1);
 
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
