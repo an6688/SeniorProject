@@ -132,7 +132,7 @@ using System.Collections;
 
             if (MyRigidBody.velocity.y < 0)
             {
-                myAnimator.SetBool("land", true);
+                MyAnimator.SetBool("land", true);
             }
 
             if (!Attack && (OnGround || airControl))
@@ -144,7 +144,7 @@ using System.Collections;
             {
                 MyRigidBody.AddForce(new Vector2(0, jumpForce));
             }
-            myAnimator.SetFloat("speed", Mathf.Abs(horizontal));
+            MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
         }
 
         //private void HandleAttacks() // for jump attack later, thats why it is attackS
@@ -158,9 +158,9 @@ using System.Collections;
 
         private void HandleRun()
         {
-            if (run && !this.myAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
+            if (run && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
             {
-                myAnimator.SetTrigger("run");
+                MyAnimator.SetTrigger("run");
                 MyRigidBody.velocity = Vector2.zero;
             }
         }
@@ -170,19 +170,19 @@ using System.Collections;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 // jump = true;
-                myAnimator.SetTrigger("jump");
+                MyAnimator.SetTrigger("jump");
             }
 
             if (Input.GetKeyDown(KeyCode.RightShift))
             {
                 // Attack = true; 
-                myAnimator.SetTrigger("attack");
+                MyAnimator.SetTrigger("attack");
             }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 // run = true; 
-                myAnimator.SetTrigger("run");
+                MyAnimator.SetTrigger("run");
             }
         }
 
@@ -234,12 +234,12 @@ using System.Collections;
         {
             if (!OnGround)
             {
-                myAnimator.SetLayerWeight(1,1);
+                MyAnimator.SetLayerWeight(1,1);
             }
             else
             {
                 {
-                    myAnimator.SetLayerWeight(1, 0);
+                    MyAnimator.SetLayerWeight(1, 0);
                 }
             }
         }

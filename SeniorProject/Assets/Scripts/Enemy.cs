@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    [SerializeField] private IEnemyState currentState;
+    private IEnemyState currentState;
+
+    public GameObject Target { get; set; }
 
     // Start is called before the first frame update
     public override void Start()
@@ -17,6 +19,21 @@ public class Enemy : Character
     void Update()
     {
         if (currentState != null) currentState.Execute();
+
+        LookAtTarget();
+    }
+
+    private void LookAtTarget()
+    {
+        if (Target != null)
+        {
+            float xDir = Target.transform.position.x - transform.position.x;
+
+            if (xDir < 0 && facingRight || xDir > 0 && !facingRight)
+            {
+                ChangeDirection();
+            }
+        }
     }
 
     public void ChangeState(IEnemyState newState)
@@ -35,7 +52,7 @@ public class Enemy : Character
 
     public void Move()
     {
-        myAnimator.SetFloat("speed", 1);
+        MyAnimator.SetFloat("speed", 1);
 
         transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
     }
@@ -43,5 +60,10 @@ public class Enemy : Character
     public Vector2 GetDirection()
     {
         return facingRight ? Vector2.right : Vector2.left;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        currentState.OnTriggerEnter(other);
     }
 }

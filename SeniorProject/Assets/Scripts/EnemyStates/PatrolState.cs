@@ -8,7 +8,12 @@ public class PatrolState : IEnemyState
 
     private float patrolTimer;
 
-    private float patrolDuration = 10; 
+    private float patrolDuration = 10;
+
+    public void Enter(Enemy enemy)
+    {
+        this.enemy = enemy;
+    }
 
     public void Execute()
     {
@@ -16,22 +21,26 @@ public class PatrolState : IEnemyState
         Patrol();
 
         enemy.Move();
-    }
 
-    public void Enter(Enemy enemy)
-    {
-        this.enemy = enemy;
+        if (enemy.Target != null)
+        {
+            enemy.ChangeState(new RangedState());
+        }
     }
 
     public void Exit()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("exit in Patrol state to be implemented!");
     }
 
-    public void OnTrigger(Collider2D other)
+    public void OnTriggerEnter(Collider2D other)
     {
-        throw new System.NotImplementedException();
+        if (other.tag == "Edge")
+        {
+            enemy.ChangeDirection();
+        }
     }
+
 
     private void Patrol()
     {

@@ -19,7 +19,7 @@ public class AttackState : IEnemyState
         throw new System.NotImplementedException();
     }
 
-    public void OnTrigger(Collider2D other)
+    public void OnTriggerEnter(Collider2D other)
     {
         throw new System.NotImplementedException();
     }

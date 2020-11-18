@@ -6,9 +6,7 @@ public abstract class Character : MonoBehaviour
 {
     // Character is a super class that works for both the player and enemy
 
-    [SerializeField] public Animator myAnimator { get; private set; }
-
-    // public Animator MyAnimator { get; set; }
+    public Animator MyAnimator { get; private set; }
 
     // knifeposition is a place holder variable for now, enemies may throw objects [SerializeField] private Transform knifePosition; 
 
@@ -25,7 +23,7 @@ public abstract class Character : MonoBehaviour
     {
         Debug.Log("CharStart: ");
         facingRight = true;
-        myAnimator = GetComponent<Animator>();
+        MyAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
