@@ -8,10 +8,18 @@ using System.Collections;
 
         /*private Animator myAnimator; // in Character.cs
 
-    [SerializeField]f
-    private float movementSpeed; // in Character.cs 
+        [SerializeField]
+        private float movementSpeed; // in Character.cs 
 
-    private bool facingRight; // in Character.cs*/
+        private bool facingRight; // in Character.cs*/
+
+
+        // private bool attack; // in character.cs
+
+        // private bool isGrounded;
+
+        // private bool jump;
+
 
         private static Player instance;
 
@@ -38,19 +46,12 @@ using System.Collections;
 
         [SerializeField] private float jumpForce;
 
-        // private bool attack; // in character.cs
-
-        // private bool isGrounded;
-
-        // private bool jump;
-
         private bool run;
         
         public Rigidbody2D MyRigidBody { get; set; }
 
         public bool Jump { get; set; }
         public bool Run { get; set; }
-
         public bool OnGround { get; set; }
 
         private Vector2 startPos;
@@ -238,9 +239,7 @@ using System.Collections;
             }
             else
             {
-                {
-                    MyAnimator.SetLayerWeight(1, 0);
-                }
+                MyAnimator.SetLayerWeight(1, 0);
             }
         }
     }
