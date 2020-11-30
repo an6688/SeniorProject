@@ -36,8 +36,7 @@ public class AttackBehavior : StateMachineBehaviour
         animator.GetComponent<Character>().Attack = false;
 
         animator.ResetTrigger("attack");
-
-        animator.ResetTrigger("attack");
+        animator.ResetTrigger("throw");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -293,6 +293,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   meleeRange: 0
+  knifePosition: {fileID: 0}
+  knifePrefab: {fileID: 0}
 --- !u!114 &21822715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3158,6 +3160,88 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3159e12c40895c84cb5af76230ed621f, type: 3}
+--- !u!1 &728275580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 728275582}
+  - component: {fileID: 728275581}
+  m_Layer: 0
+  m_Name: Kunai
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &728275581
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728275580}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 27ae73ea5fd8e284184ec68b331078cb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.32, y: 1.6}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &728275582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728275580}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0061274413, w: -0.9999813}
+  m_LocalPosition: {x: 0.2830524, y: 0.63222957, z: 0}
+  m_LocalScale: {x: 0.3268506, y: 0.36982235, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1856109213}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &771235008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4254157435016068, guid: 6a838b04290d9db44994ec707cedaea7,
@@ -5804,7 +5888,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.77, y: 0}
+  m_Offset: {x: 0.4, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5815,7 +5899,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.07, y: 0.3}
+  m_Size: {x: 2.46, y: 0.18}
   m_EdgeRadius: 0
 --- !u!114 &1616359377
 MonoBehaviour:
@@ -5906,6 +5990,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c1370f601ce2a04cb6f231d2e6869fa, type: 3}
+--- !u!1 &1662153239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1662153240}
+  m_Layer: 0
+  m_Name: KnifePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1662153240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662153239}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0061274413, w: -0.9999813}
+  m_LocalPosition: {x: 0.13, y: -0.12, z: -4.8664656}
+  m_LocalScale: {x: 0.019482987, y: 0.22718926, z: 1.32}
+  m_Children: []
+  m_Father: {fileID: 1856109213}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1697695401
 GameObject:
   m_ObjectHideFlags: 0
@@ -6776,10 +6890,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856109210}
   m_LocalRotation: {x: -0, y: -0, z: -0.0061274413, w: -0.9999813}
-  m_LocalPosition: {x: -0.567, y: -1.411, z: 0}
-  m_LocalScale: {x: 3.9414039, y: 3.659953, z: 1}
+  m_LocalPosition: {x: -0.845, y: -1.72, z: 0}
+  m_LocalScale: {x: 3.0595555, y: 2.703948, z: 1}
   m_Children:
   - {fileID: 1616359375}
+  - {fileID: 1662153240}
+  - {fileID: 728275582}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.702}
@@ -6818,6 +6934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 4
   meleeRange: 2
+  knifePosition: {fileID: 1662153240}
+  knifePrefab: {fileID: 728275580}
 --- !u!61 &1856109216
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6842,7 +6960,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.650838, y: 0.64}
+  m_Size: {x: 0.74, y: 0.7}
   m_EdgeRadius: 0
 --- !u!1 &1858589804
 GameObject:
@@ -7274,7 +7392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1962511414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.71, y: -2.6, z: -4.0039062}
+  m_LocalPosition: {x: 6.48, y: -2.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7304,7 +7422,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.82}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &1970286307
 GameObject:

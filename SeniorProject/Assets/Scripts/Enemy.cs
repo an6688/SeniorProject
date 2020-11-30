@@ -10,6 +10,8 @@ public class Enemy : Character
 
     [SerializeField] private float meleeRange;
 
+  
+
     public bool InMeleeRange
     {
         get
