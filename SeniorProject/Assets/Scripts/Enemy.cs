@@ -10,7 +10,12 @@ public class Enemy : Character
 
     [SerializeField] private float meleeRange;
 
-  
+    [SerializeField]
+    private float throwRange;
+
+    /// <summary>
+    /// Indicates if the enemy is in melee range
+    /// </summary>
 
     public bool InMeleeRange
     {
@@ -22,6 +27,23 @@ public class Enemy : Character
             }
 
             return false; 
+        }
+    }
+
+    /// <summary>
+    /// Indicates if the enemy is in throw range
+    /// </summary>
+    public bool InThrowRange
+    {
+        get
+        {
+            if (Target != null)
+            {
+                return Vector2.Distance(transform.position, Target.transform.position) <= throwRange;
+
+            }
+
+            return false;
         }
     }
 
