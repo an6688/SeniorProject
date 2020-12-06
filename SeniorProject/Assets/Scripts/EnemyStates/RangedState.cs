@@ -10,7 +10,7 @@ public class RangedState : IEnemyState
 
     private float throwCoolDown = 3;
 
-    private bool canThrow; 
+    private bool canThrow = true; 
     public void Enter(Enemy enemy)
     {
         this.enemy = enemy;

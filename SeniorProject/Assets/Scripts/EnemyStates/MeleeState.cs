@@ -8,12 +8,17 @@ public class MeleeState : IEnemyState
 
     private float attackTimer;
     private float attackCoolDown = 3;
-    private bool canAttack = true; 
+    private bool canAttack = true;
+
+    public void Enter(Enemy enemy)
+    {
+        this.enemy = enemy;
+    }
 
     public void Execute()
-    { 
+    {
         Attack();
-        if (!enemy.InMeleeRange)
+        if (enemy.InThrowRange && !enemy.InMeleeRange)
         {
             enemy.ChangeState(new RangedState());
         }
@@ -21,11 +26,6 @@ public class MeleeState : IEnemyState
         {
             enemy.ChangeState(new IdleState());
         }
-    }
-
-    public void Enter(Enemy enemy)
-    {
-        this.enemy = enemy; 
     }
 
     public void Exit()

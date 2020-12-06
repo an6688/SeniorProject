@@ -17,6 +17,21 @@ public class Enemy : Character
     /// Indicates if the enemy is in melee range
     /// </summary>
 
+    // Start is called before the first frame update
+    public override void Start()
+    {
+        base.Start();
+        ChangeState(new IdleState());
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (currentState != null) currentState.Execute();
+
+        LookAtTarget();
+    }
+
     public bool InMeleeRange
     {
         get
@@ -42,26 +57,10 @@ public class Enemy : Character
                 return Vector2.Distance(transform.position, Target.transform.position) <= throwRange;
 
             }
-
             return false;
         }
     }
-
-    // Start is called before the first frame update
-    public override void Start()
-    {
-        base.Start();
-        ChangeState(new IdleState());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (currentState != null) currentState.Execute();
-
-        LookAtTarget();
-    }
-
+  
     private void LookAtTarget()
     {
         if (Target != null)

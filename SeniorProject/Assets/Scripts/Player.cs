@@ -242,4 +242,12 @@ using System.Collections;
                 MyAnimator.SetLayerWeight(1, 0);
             }
         }
-    }
+
+        public override void ThrowKnife(int value)
+        {
+            if (!OnGround && value == 1 || OnGround && value == 0)
+            {
+                base.ThrowKnife(value);
+            }
+        }
+}
