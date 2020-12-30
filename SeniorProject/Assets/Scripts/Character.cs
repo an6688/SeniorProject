@@ -15,6 +15,8 @@ public abstract class Character : MonoBehaviour
 
     public abstract void Death();
 
+    [SerializeField] private BoxCollider2D broomCollider; 
+
     [SerializeField] protected float movementSpeed;
 
     [SerializeField] protected int health;
@@ -22,6 +24,9 @@ public abstract class Character : MonoBehaviour
     [SerializeField] private Transform knifePosition;
 
     [SerializeField] private GameObject knifePrefab;
+
+    /// A list of damage sources (tags that can damage the character)
+    [SerializeField] private List<string> damageSources;
 
     public abstract IEnumerator TakeDamage();
 
@@ -63,11 +68,17 @@ public abstract class Character : MonoBehaviour
         }
     }
 
+    public void MelleeAttack()
+    {
+        broomCollider.enabled = !broomCollider.enabled;
+    }
+
     public virtual void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.tag == "Broom")
+        //If the object we hit is a damage source
+        if (damageSources.Contains(other.tag))
         {
+            //Run the take damage co routine
             StartCoroutine(TakeDamage());
         }
     }

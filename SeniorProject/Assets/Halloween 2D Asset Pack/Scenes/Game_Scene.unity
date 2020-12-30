@@ -291,10 +291,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d52822c0ac1e5478f1f6d2c0ad7ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  broomCollider: {fileID: 0}
   movementSpeed: 4
   health: 0
   knifePosition: {fileID: 0}
   knifePrefab: {fileID: 0}
+  damageSources: []
   meleeRange: 0
   throwRange: 0
 --- !u!114 &21822715
@@ -2681,8 +2683,7 @@ Transform:
   - {fileID: 1962313664}
   - {fileID: 20204266}
   - {fileID: 2019583303}
-  - {fileID: 722546439}
-  - {fileID: 1782364087}
+  - {fileID: 1736008831}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2719,10 +2720,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f96db2109295d4fb367911798309c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  broomCollider: {fileID: 1736008832}
   movementSpeed: 4
-  health: 0
+  health: 50
   knifePosition: {fileID: 0}
   knifePrefab: {fileID: 0}
+  damageSources: []
   groundPoints:
   - {fileID: 1412319032}
   - {fileID: 1962313664}
@@ -2733,8 +2736,7 @@ MonoBehaviour:
     m_Bits: 55
   airControl: 0
   jumpForce: 400
-  broomLeft: {fileID: 1782364086}
-  broomRight: {fileID: 722546438}
+  immortalTime: 0
 --- !u!61 &546333097
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3027,6 +3029,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2fe437278acc16449b3ada9b6425edc0, type: 3}
+--- !u!1 &652153461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 652153462}
+  m_Layer: 2
+  m_Name: BroomCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &652153462
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652153461}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1856109213}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &652519654 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224531305128107764, guid: 843f53f3813ffd94a94509b7fdd15a35,
@@ -3317,63 +3349,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3159e12c40895c84cb5af76230ed621f, type: 3}
---- !u!1 &722546438
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 722546439}
-  - component: {fileID: 722546440}
-  m_Layer: 0
-  m_Name: Broom Right
-  m_TagString: Broom
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &722546439
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722546438}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.64, y: 0, z: 0}
-  m_LocalScale: {x: 0.8875, y: 1.2375, z: 1}
-  m_Children: []
-  m_Father: {fileID: 546333094}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &722546440
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 722546438}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 11.7, y: 11.94}
-  m_EdgeRadius: 0
 --- !u!4 &771235008 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4254157435016068, guid: 6a838b04290d9db44994ec707cedaea7,
@@ -6034,6 +6009,7 @@ GameObject:
   - component: {fileID: 1616359375}
   - component: {fileID: 1616359377}
   - component: {fileID: 1616359376}
+  - component: {fileID: 1616359378}
   m_Layer: 8
   m_Name: Sight
   m_TagString: Untagged
@@ -6094,6 +6070,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 1856109215}
+--- !u!114 &1616359378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616359374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b332eb6f112bb64cbb32e3e3f4af85c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  other: {fileID: 1736008832}
 --- !u!4 &1626483925 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4422271423069056, guid: 733723fa004515340b2ab918ad86bb74,
@@ -6326,6 +6315,77 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 381693479}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1736008830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736008831}
+  - component: {fileID: 1736008833}
+  - component: {fileID: 1736008832}
+  m_Layer: 0
+  m_Name: BroomCollider
+  m_TagString: Broom
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1736008831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736008830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.23, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 546333094}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1736008832
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736008830}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.22, y: 14.63}
+  m_EdgeRadius: 0
+--- !u!114 &1736008833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736008830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410dfb6f00ac0c24182b13cf9bc3ca26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetTag: EnemyPumpkin
 --- !u!1 &1752074274
 GameObject:
   m_ObjectHideFlags: 0
@@ -6560,63 +6620,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aaf08994c6ed80f4b9e4ccc23066dfe1, type: 3}
---- !u!1 &1782364086
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1782364087}
-  - component: {fileID: 1782364088}
-  m_Layer: 0
-  m_Name: Broom Left
-  m_TagString: Broom
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1782364087
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782364086}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.58, y: 0, z: 0}
-  m_LocalScale: {x: 0.8875, y: 1.2375, z: 1}
-  m_Children: []
-  m_Father: {fileID: 546333094}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1782364088
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1782364086}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 11.7, y: 11.94}
-  m_EdgeRadius: 0
 --- !u!1001 &1792007184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7165,6 +7168,7 @@ Transform:
   m_Children:
   - {fileID: 1616359375}
   - {fileID: 1662153240}
+  - {fileID: 652153462}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7201,11 +7205,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00d52822c0ac1e5478f1f6d2c0ad7ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  broomCollider: {fileID: 0}
   movementSpeed: 4
   health: 30
   knifePosition: {fileID: 1662153240}
   knifePrefab: {fileID: 7628052324846967882, guid: 92acc2262505e1649aed756cc74cbecb,
     type: 3}
+  damageSources:
+  - Broom
   meleeRange: 2
   throwRange: 4
 --- !u!61 &1856109216

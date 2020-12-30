@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using UnityEngine; 
 using System.Collections;
 
 public delegate void DeadEventHandler();
@@ -31,8 +31,14 @@ public class Player : Character // using inheritence to give functionality from 
     [SerializeField] private bool airControl;
 
     [SerializeField] private float jumpForce;
+    
+    [SerializeField] private float immortalTime;
 
     private bool run;
+
+    private bool immortal = false;
+
+    private SpriteRenderer spriteRenderer;
 
     public Rigidbody2D MyRigidBody { get; set; }
 
@@ -42,9 +48,6 @@ public class Player : Character // using inheritence to give functionality from 
 
     private Vector2 startPos;
 
-    public GameObject broomLeft;
-
-    public GameObject broomRight;
 
     public override bool isDead
     {
@@ -125,29 +128,6 @@ public class Player : Character // using inheritence to give functionality from 
 
     private void HandleMovement(float horizontal)
     {
-        /*if (_myRigidbody2D.velocity.y < 0)
-        {
-            MyAnimator.SetBool("land", true);
-        }
-        if (isGrounded && jump)
-        {
-            isGrounded = false;
-            _myRigidbody2D.AddForce(new Vector2(0, jumpForce));
-            MyAnimator.SetTrigger("jump");
-        }
-
-        if (!this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && (isGrounded || airControl))
-        {
-            _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
-        }
-
-        if (!this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Run"))
-        {
-            _myRigidbody2D.velocity = new Vector2(horizontal * movementSpeed, _myRigidbody2D.velocity.y); // vector with an x value of -1 and a y value of 0
-        }
-
-        MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));*/
-
         if (MyRigidBody.velocity.y < 0)
         {
             MyAnimator.SetBool("land", true);
@@ -164,15 +144,6 @@ public class Player : Character // using inheritence to give functionality from 
         }
         MyAnimator.SetFloat("speed", Mathf.Abs(horizontal));
     }
-
-    //private void HandleAttacks() // for jump attack later, thats why it is attackS
-    //{
-    //    if (Attack && !this.MyAnimator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-    //    {
-    //        MyAnimator.SetTrigger("attack");
-    //        _myRigidbody2D.velocity = Vector2.zero;
-    //    }
-    //}
 
     private void HandleRun()
     {
@@ -268,7 +239,7 @@ public class Player : Character // using inheritence to give functionality from 
         }
     }
 
-    void broomAttack()
+    /*void broomAttack()
     {
         if (facingRight)
         {
@@ -291,10 +262,44 @@ public class Player : Character // using inheritence to give functionality from 
             broomLeft.SetActive(false);
         }
 
-    }
+    }*/
 
     public override IEnumerator TakeDamage()
     {
-        yield return null;
+        if (!immortal)
+        {
+            health -= 10;
+
+            if (!isDead)
+            {
+                MyAnimator.SetTrigger("damage");
+                immortal = true;
+
+                StartCoroutine(IndicateImmortal());
+                yield return new WaitForSeconds(immortalTime);
+
+                immortal = false;
+            }
+            else
+            {
+                MyAnimator.SetLayerWeight(1, 0);
+                MyAnimator.SetTrigger("die");
+            }
+
+        }
+    }
+
+    private IEnumerator IndicateImmortal()
+    {
+        while (immortal)
+        {
+            spriteRenderer.enabled = false;
+
+            yield return new WaitForSeconds(.1f);
+
+            spriteRenderer.enabled = true;
+
+            yield return new WaitForSeconds(.1f);
+        }
     }
 }
