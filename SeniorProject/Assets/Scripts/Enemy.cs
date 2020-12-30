@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Enemy : Character
@@ -10,8 +11,7 @@ public class Enemy : Character
 
     [SerializeField] private float meleeRange;
 
-    [SerializeField]
-    private float throwRange;
+    [SerializeField] private float throwRange;
 
     /// <summary>
     /// Indicates if the enemy is in melee range
@@ -21,15 +21,46 @@ public class Enemy : Character
     public override void Start()
     {
         base.Start();
+        //Makes the RemoveTarget function listen to the player's Dead event
+        Player.Instance.Dead += new DeadEventHandler(RemoveTarget);
         ChangeState(new IdleState());
+    }
+
+    private void RemoveTarget()
+    {
+        //Removes the target
+        Target = null;
+
+        //Changes the state to a patrol state
+        ChangeState(new PatrolState());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentState != null) currentState.Execute();
+        if (currentState != null & !isDead) currentState.Execute();
 
         LookAtTarget();
+
+        /*if (!isDead)
+        {
+            currentState.Execute();
+            LookAtTarget();
+        }*/
+    }
+
+    public override IEnumerator TakeDamage()
+    {
+        health -= 5;
+        if (!isDead)
+        {
+            MyAnimator.SetTrigger("damage");
+        }
+        else
+        {
+            MyAnimator.SetTrigger("die");
+            yield return null; 
+        }
     }
 
     public bool InMeleeRange
@@ -103,8 +134,22 @@ public class Enemy : Character
         return facingRight ? Vector2.right : Vector2.left;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public override void OnTriggerEnter2D(Collider2D other)
     {
+        base.OnTriggerEnter2D(other);
         currentState.OnTriggerEnter(other);
+    }
+
+    public override bool isDead
+    {
+        get
+        {
+            return health <= 0; 
+        }
+    }
+
+    public override void Death()
+    {
+        Destroy(gameObject);
     }
 }

@@ -8,17 +8,22 @@ public abstract class Character : MonoBehaviour
 
     public Animator MyAnimator { get; private set; }
 
+    protected bool facingRight;
+    public bool Attack { get; set; }
+    public abstract bool isDead { get; }
+    public bool TakingDamage { get; set; }
+
+    public abstract void Death();
+
     [SerializeField] protected float movementSpeed;
 
-    protected bool facingRight;
+    [SerializeField] protected int health;
 
-    public bool Attack { get; set; }
-
-    // knifeposition is a place holder variable for now, enemies may throw objects
     [SerializeField] private Transform knifePosition;
 
-    // placeholder for enemies throwing object
     [SerializeField] private GameObject knifePrefab;
+
+    public abstract IEnumerator TakeDamage();
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -57,4 +62,14 @@ public abstract class Character : MonoBehaviour
             tmp.GetComponent<Knife>().Initialize(Vector2.left);
         }
     }
+
+    public virtual void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.tag == "Broom")
+        {
+            StartCoroutine(TakeDamage());
+        }
+    }
+
 }
