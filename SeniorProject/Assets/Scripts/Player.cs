@@ -74,56 +74,59 @@ public class Player : Character // using inheritence to give functionality from 
     {
         MyRigidBody.velocity = Vector2.zero;
         MyAnimator.SetTrigger("idle");
-        health = 30;
+        health = 100;
         transform.position = startPos;
     }
 
     public override void Start()
     {
-        //facingRight = true; // in character.cs
-        // Debug.Log("PlayerStart: ");
         base.Start();
-
         startPos = transform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
         MyRigidBody = GetComponent<Rigidbody2D>();
-        // myAnimator = GetComponent<Animator>(); // in character.cs
-        //myAnimator.GetComponent<Rigidbody>().useGravity = false;
     }
 
 
     void Update()
     {
-        if (transform.position.y <= -14f)
+        if (!TakingDamage && !IsDead)
         {
-            MyRigidBody.velocity = Vector2.zero;
-            transform.position = startPos;
+            if (transform.position.y <= -14f)
+            {
+                Death();
+            }
+            HandleInput();
         }
-
-        HandleInput();
-
     }
 
     // fixed Update is called once per frame
     void FixedUpdate() // this function runs a fixed amount of times based on time step 
     {
-        float horizontal = Input.GetAxis("Horizontal");
+        if (!TakingDamage && !IsDead)
+        {
+            float horizontal = Input.GetAxis("Horizontal");
 
-        // isGrounded = IsGrounded();
-        OnGround = IsGrounded();
+            OnGround = IsGrounded();
 
-        HandleMovement(horizontal);
+            HandleMovement(horizontal);
 
-        Flip(horizontal);
+            Flip(horizontal);
 
-        HandleInput();
+            HandleLayers();
+        }
+    }
 
-        // HandleAttacks();
+    public bool IsDead
+    {
+        get
+        {
+            if (health <= 0)
+            {
+                OnDead();
+            }
 
-        HandleLayers();
-
-        HandleRun();
-
-        // ResetValues();
+            return health <= 0;
+        }
     }
 
     private void HandleMovement(float horizontal)
@@ -189,14 +192,6 @@ public class Player : Character // using inheritence to give functionality from 
         }
     }
 
-    //private void ResetValues()
-    //{
-    //    // resets player condition back to idle
-    //    Attack = false;
-    //    run = false;
-    //    jump = false; 
-    //}
-
     private bool IsGrounded()
     {
         if (MyRigidBody.velocity.y <= 0)
@@ -239,36 +234,26 @@ public class Player : Character // using inheritence to give functionality from 
         }
     }
 
-    /*void broomAttack()
+    private IEnumerator IndicateImmortal()
     {
-        if (facingRight)
+        // this function makes the player flash while immortal
+        while (immortal)
         {
-            broomRight.SetActive(true);
-        }
-        if (!facingRight)
-        {
-            broomLeft.SetActive(true);
+            spriteRenderer.enabled = false;
+
+            yield return new WaitForSeconds(.1f);
+
+            spriteRenderer.enabled = true;
+
+            yield return new WaitForSeconds(.1f);
         }
     }
-
-    void broomAttackDone()
-    {
-        if (facingRight)
-        {
-            broomRight.SetActive(false);
-        }
-        if (!facingRight)
-        {
-            broomLeft.SetActive(false);
-        }
-
-    }*/
 
     public override IEnumerator TakeDamage()
     {
         if (!immortal)
         {
-            health -= 10;
+            health -= 10; // this is the amount of damage taken when struck 
 
             if (!isDead)
             {
@@ -285,21 +270,6 @@ public class Player : Character // using inheritence to give functionality from 
                 MyAnimator.SetLayerWeight(1, 0);
                 MyAnimator.SetTrigger("die");
             }
-
-        }
-    }
-
-    private IEnumerator IndicateImmortal()
-    {
-        while (immortal)
-        {
-            spriteRenderer.enabled = false;
-
-            yield return new WaitForSeconds(.1f);
-
-            spriteRenderer.enabled = true;
-
-            yield return new WaitForSeconds(.1f);
         }
     }
 }

@@ -34,7 +34,7 @@ public class AttackBehavior : StateMachineBehaviour
     {
         // Player.Instance.Attack = false;
         animator.GetComponent<Character>().Attack = false;
-        animator.GetComponent<Character>().MelleeAttack();
+        animator.GetComponent<Character>().BroomCollider.enabled = false;
         animator.ResetTrigger("attack");
         animator.ResetTrigger("throw");
     }

@@ -8,6 +8,7 @@ TagManager:
   - EnemyPumpkin
   - EnemyKnife
   - Broom
+  - EnemySword
   layers:
   - Default
   - TransparentFX

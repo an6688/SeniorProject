@@ -10,8 +10,9 @@ public abstract class Character : MonoBehaviour
 
     protected bool facingRight;
     public bool Attack { get; set; }
-    public abstract bool isDead { get; }
     public bool TakingDamage { get; set; }
+
+    public abstract bool isDead { get; }
 
     public abstract void Death();
 
@@ -27,6 +28,8 @@ public abstract class Character : MonoBehaviour
 
     /// A list of damage sources (tags that can damage the character)
     [SerializeField] private List<string> damageSources;
+
+    public BoxCollider2D BroomCollider => broomCollider;
 
     public abstract IEnumerator TakeDamage();
 
@@ -70,7 +73,7 @@ public abstract class Character : MonoBehaviour
 
     public void MelleeAttack()
     {
-        broomCollider.enabled = !broomCollider.enabled;
+        BroomCollider.enabled = true;
     }
 
     public virtual void OnTriggerEnter2D(Collider2D other)

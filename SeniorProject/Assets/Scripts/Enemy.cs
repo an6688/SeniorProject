@@ -13,11 +13,6 @@ public class Enemy : Character
 
     [SerializeField] private float throwRange;
 
-    /// <summary>
-    /// Indicates if the enemy is in melee range
-    /// </summary>
-
-    // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
@@ -26,27 +21,12 @@ public class Enemy : Character
         ChangeState(new IdleState());
     }
 
-    private void RemoveTarget()
-    {
-        //Removes the target
-        Target = null;
-
-        //Changes the state to a patrol state
-        ChangeState(new PatrolState());
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (currentState != null & !isDead) currentState.Execute();
 
         LookAtTarget();
-
-        /*if (!isDead)
-        {
-            currentState.Execute();
-            LookAtTarget();
-        }*/
     }
 
     public override IEnumerator TakeDamage()
@@ -69,29 +49,42 @@ public class Enemy : Character
         {
             if (Target != null)
             {
-                return Vector2.Distance(transform.position, Target.transform.position) <= meleeRange;
+                return Vector2.Distance(
+                    transform.position, 
+                    Target.transform.position) 
+                       <= meleeRange;
             }
 
             return false; 
         }
     }
 
-    /// <summary>
     /// Indicates if the enemy is in throw range
-    /// </summary>
     public bool InThrowRange
     {
         get
         {
             if (Target != null)
             {
-                return Vector2.Distance(transform.position, Target.transform.position) <= throwRange;
+                return Vector2.Distance(
+                    transform.position, 
+                    Target.transform.position) 
+                       <= throwRange;
 
             }
             return false;
         }
     }
-  
+
+    private void RemoveTarget()
+    {
+        //Removes the target
+        Target = null;
+
+        //Changes the state to a patrol state
+        ChangeState(new PatrolState());
+    }
+
     private void LookAtTarget()
     {
         if (Target != null)
