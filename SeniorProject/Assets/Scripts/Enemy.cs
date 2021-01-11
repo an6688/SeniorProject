@@ -13,6 +13,11 @@ public class Enemy : Character
 
     [SerializeField] private float throwRange;
 
+    private Vector2 startPos;
+
+    [SerializeField] private Transform leftEdge;
+    [SerializeField] private Transform rightEdge; 
+
     public override void Start()
     {
         base.Start();
@@ -143,6 +148,12 @@ public class Enemy : Character
 
     public override void Death()
     {
+        // the commented */*/ lines of code allow the enemy to be respawned
+        // but for now the enemy object is destroyed 
+        /*MyAnimator.ResetTrigger("die");
+        MyAnimator.SetTrigger("idle");
+        health = 30;
+        transform.position = startPos; */
         Destroy(gameObject);
     }
 }

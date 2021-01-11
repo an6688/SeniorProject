@@ -10,7 +10,7 @@ public class CollisionTrigger : MonoBehaviour
     /// <summary>
     /// The player's collider
     /// </summary>
-    private BoxCollider2D playerCollider;
+    //private BoxCollider2D playerCollider;
 
     /// <summary>
     /// The platform collider
@@ -29,7 +29,7 @@ public class CollisionTrigger : MonoBehaviour
     {
 
         //Ignores collision with the player
-        playerCollider = GameObject.Find("Player").GetComponent<BoxCollider2D>();
+        //playerCollider = GameObject.Find("Player").GetComponent<BoxCollider2D>();
         Physics2D.IgnoreCollision(platformCollider, platformTrigger, true);
 
     }
@@ -41,10 +41,10 @@ public class CollisionTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //If the player collides with the platform
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "EnemyPumpkin")
         {
             //Then ignore collision
-            Physics2D.IgnoreCollision(platformCollider, playerCollider, true);
+            Physics2D.IgnoreCollision(platformCollider, other, true);
         }
     }
 
@@ -55,10 +55,10 @@ public class CollisionTrigger : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         //If the player stop colliding
-        if (other.gameObject.name == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "EnemyPumpkin")
         {
             //Stop the collision from ignoring the player
-            Physics2D.IgnoreCollision(platformCollider, playerCollider, false);
+            Physics2D.IgnoreCollision(platformCollider, other, false);
         }
     }
 

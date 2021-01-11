@@ -9,10 +9,11 @@ public class IdleState : IEnemyState
 
     private float idleTimer;
 
-    private float idleDuration = 5;
+    private float idleDuration;
 
     public void Enter(Enemy enemy)
     {
+        idleDuration = UnityEngine.Random.Range(1, 10); // this function allows the enemy to idle for a random amount of seconds
         this.enemy = enemy;
     }
 
@@ -35,7 +36,10 @@ public class IdleState : IEnemyState
 
     public void OnTriggerEnter(Collider2D other)
     {
-        Debug.Log("ontriggerenter to be implemented!");
+        if (other.tag == "Broom")
+        {
+            enemy.Target = Player.Instance.gameObject;
+        }
     }
 
     public virtual void Idle()

@@ -8,16 +8,16 @@ public class PatrolState : IEnemyState
 
     private float patrolTimer;
 
-    private float patrolDuration = 10;
+    private float patrolDuration;
 
     public void Enter(Enemy enemy)
     {
+        patrolDuration = UnityEngine.Random.Range(1, 10);
         this.enemy = enemy;
     }
 
     public void Execute()
     {
-        Debug.Log("i am patrolling!");
         Patrol();
 
         enemy.Move();
@@ -38,6 +38,10 @@ public class PatrolState : IEnemyState
         if (other.tag == "Edge")
         {
             enemy.ChangeDirection();
+        }
+        if (other.tag == "Broom")
+        {
+            enemy.Target = Player.Instance.gameObject;
         }
     }
 
