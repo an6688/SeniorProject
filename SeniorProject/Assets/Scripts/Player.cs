@@ -9,6 +9,8 @@ public class Player : Character // using inheritence to give functionality from 
 
     public event DeadEventHandler Dead;
 
+    [SerializeField] private Stat healthStat;
+
     public static Player Instance
     {
         get
@@ -48,17 +50,16 @@ public class Player : Character // using inheritence to give functionality from 
 
     private Vector2 startPos;
 
-
     public override bool isDead
     {
         get
         {
-            if (health <= 0)
+            if (healthStat.CurrentVal <= 0)
             {
                 OnDead();
             }
 
-            return health <= 0;
+            return healthStat.CurrentVal <= 0;
         }
     }
 
@@ -74,7 +75,7 @@ public class Player : Character // using inheritence to give functionality from 
     {
         MyRigidBody.velocity = Vector2.zero;
         MyAnimator.SetTrigger("idle");
-        health = 100;
+        healthStat.CurrentVal = healthStat.MaxVal;
         transform.position = startPos;
     }
 
@@ -84,6 +85,7 @@ public class Player : Character // using inheritence to give functionality from 
         startPos = transform.position;
         spriteRenderer = GetComponent<SpriteRenderer>();
         MyRigidBody = GetComponent<Rigidbody2D>();
+        healthStat.Initialize();
     }
 
 
@@ -120,12 +122,12 @@ public class Player : Character // using inheritence to give functionality from 
     {
         get
         {
-            if (health <= 0)
+            if (healthStat.CurrentVal <= 0)
             {
                 OnDead();
             }
 
-            return health <= 0;
+            return healthStat.CurrentVal <= 0;
         }
     }
 
@@ -253,7 +255,7 @@ public class Player : Character // using inheritence to give functionality from 
     {
         if (!immortal)
         {
-            health -= 10; // this is the amount of damage taken when struck 
+            healthStat.CurrentVal -= 10; // this is the amount of damage taken when struck 
 
             if (!isDead)
             {
