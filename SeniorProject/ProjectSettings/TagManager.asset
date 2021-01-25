@@ -9,6 +9,7 @@ TagManager:
   - EnemyKnife
   - Broom
   - EnemySword
+  - Candy
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: pickups
+    uniqueID: 650127709
+    locked: 0
+  - name: New Layer
+    uniqueID: 270203339
     locked: 0

@@ -16,7 +16,10 @@ public class Enemy : Character
     private Vector2 startPos;
 
     [SerializeField] private Transform leftEdge;
-    [SerializeField] private Transform rightEdge; 
+    [SerializeField] private Transform rightEdge;
+
+    private bool dropItem = true;
+
 
     public override void Start()
     {
@@ -43,6 +46,8 @@ public class Enemy : Character
         }
         else
         {
+            GameObject candy = (GameObject)Instantiate(GameManager.Instance.CandyPrefab, new Vector3(transform.position.x, transform.position.y + 1), Quaternion.identity);
+            // Physics2D.IgnoreCollision(GetComponent<Collider2D>(), candy.GetComponent<Collider2D>());
             MyAnimator.SetTrigger("die");
             yield return null; 
         }
@@ -150,6 +155,7 @@ public class Enemy : Character
     {
         // the commented */*/ lines of code allow the enemy to be respawned
         // but for now the enemy object is destroyed 
+        // meaning the enemy dies and does not respawn
         /*MyAnimator.ResetTrigger("die");
         MyAnimator.SetTrigger("idle");
         health = 30;

@@ -20,6 +20,7 @@ public class DeathBehavior : StateMachineBehaviour
 
         if (deathTimer >= respawnTime)
         {
+            deathTimer = 0;
             animator.GetComponent<Character>().Death();
         }
     }

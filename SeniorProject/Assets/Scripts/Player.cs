@@ -274,4 +274,13 @@ public class Player : Character // using inheritence to give functionality from 
             }
         }
     }
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Candy")
+        {
+            GameManager.Instance.CollectedCandy++;
+            Destroy(other.gameObject);
+        }
+    }
 }
