@@ -63,6 +63,13 @@ public class Player : Character // using inheritence to give functionality from 
         }
     }
 
+    public bool isFalling
+    {
+        get
+        {
+            return MyRigidBody.velocity.y < 0;
+        }
+    }
     public void OnDead()
     {
         if (Dead != null)
@@ -133,8 +140,9 @@ public class Player : Character // using inheritence to give functionality from 
 
     private void HandleMovement(float horizontal)
     {
-        if (MyRigidBody.velocity.y < 0)
+        if (isFalling)
         {
+            gameObject.layer = 11;
             MyAnimator.SetBool("land", true);
         }
 
@@ -161,10 +169,11 @@ public class Player : Character // using inheritence to give functionality from 
 
     private void HandleInput() // handleinput() for attacking and jumping etc 
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isFalling)
         {
             // jump = true;
             MyAnimator.SetTrigger("jump");
+            Jump = true; 
         }
 
         if (Input.GetKeyDown(KeyCode.RightShift))

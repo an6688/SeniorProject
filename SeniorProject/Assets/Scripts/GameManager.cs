@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-
-    [SerializeField] private GameObject candyPrefab;
+    
+    [SerializeField] public GameObject candyPrefab;
 
     [SerializeField] private TMP_Text candyText;
 
@@ -26,13 +28,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public GameObject CandyPrefab
-    {
-        get
-        {
-            return candyPrefab;
-        }
-    }
+    public GameObject CandyPrefabs => candyPrefab;
 
     public int CollectedCandy
     {
@@ -46,5 +42,14 @@ public class GameManager : MonoBehaviour
             candyText.text = value.ToString();
             this.collectedCandy = value;
         }
+    }
+
+
+    // Instantiate the Prefab somewhere between -10.0 and 10.0 on the x-z plane
+    void Start()
+    {
+        /*candies = new GameObject[candyPrefabs.Length];
+        for (int i = 0; i < candyPrefabs.Length; i++)
+            candies[i] = Instantiate(candyPrefabs[i]);*/
     }
 }

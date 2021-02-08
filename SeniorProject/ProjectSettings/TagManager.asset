@@ -10,6 +10,7 @@ TagManager:
   - Broom
   - EnemySword
   - Candy
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - 
   - Enemy
   - 
-  - 
-  - 
+  - Platform
+  - Falling
   - 
   - 
   - 

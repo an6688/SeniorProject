@@ -46,8 +46,13 @@ public class Enemy : Character
         }
         else
         {
-            GameObject candy = (GameObject)Instantiate(GameManager.Instance.CandyPrefab, new Vector3(transform.position.x, transform.position.y + 1), Quaternion.identity);
-            // Physics2D.IgnoreCollision(GetComponent<Collider2D>(), candy.GetComponent<Collider2D>());
+            if (dropItem)
+            {
+                GameObject candy = (GameObject)Instantiate(GameManager.Instance.CandyPrefabs,
+                    new Vector3(transform.position.x, transform.position.y + 1),
+                    Quaternion.identity);
+                dropItem = false; 
+            }
             MyAnimator.SetTrigger("die");
             yield return null; 
         }
@@ -130,6 +135,19 @@ public class Enemy : Character
 
             transform.Translate(GetDirection() * (movementSpeed * Time.deltaTime));
         }
+        else if (currentState is PatrolState)
+        {
+            ChangeDirection();
+        }
+        else if (currentState is RangedState)
+        {
+            Target = null;
+            ChangeState(new IdleState());
+        }
+
+        //    if ((GetDirection().x > 0 && transform.position.x < rightEdge.position.x) ||
+        // (GetDirection().x < 0 && transform.position.x > leftEdge.position.x))
+
     }
 
     public Vector2 GetDirection()
@@ -160,6 +178,6 @@ public class Enemy : Character
         MyAnimator.SetTrigger("idle");
         health = 30;
         transform.position = startPos; */
-        Destroy(gameObject);
+        Destroy(gameObject,-1);
     }
 }
