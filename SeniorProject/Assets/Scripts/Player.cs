@@ -9,7 +9,7 @@ public class Player : Character // using inheritence to give functionality from 
 
     public event DeadEventHandler Dead;
 
-    [SerializeField] private Stat healthStat;
+    [SerializeField] public Stat healthStat;
 
     public static Player Instance
     {
@@ -60,14 +60,6 @@ public class Player : Character // using inheritence to give functionality from 
             }
 
             return healthStat.CurrentVal <= 0;
-        }
-    }
-
-    public bool isFalling
-    {
-        get
-        {
-            return MyRigidBody.velocity.y < 0;
         }
     }
     public void OnDead()
@@ -140,9 +132,8 @@ public class Player : Character // using inheritence to give functionality from 
 
     private void HandleMovement(float horizontal)
     {
-        if (isFalling)
+        if (MyRigidBody.velocity.y < 0)
         {
-            gameObject.layer = 11;
             MyAnimator.SetBool("land", true);
         }
 
@@ -169,11 +160,10 @@ public class Player : Character // using inheritence to give functionality from 
 
     private void HandleInput() // handleinput() for attacking and jumping etc 
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isFalling)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             // jump = true;
             MyAnimator.SetTrigger("jump");
-            Jump = true; 
         }
 
         if (Input.GetKeyDown(KeyCode.RightShift))

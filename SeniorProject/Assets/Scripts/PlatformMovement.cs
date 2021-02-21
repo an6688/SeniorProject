@@ -31,7 +31,7 @@ public class PlatformMovement : MonoBehaviour
         //Moves the platform
         platformTransform.localPosition = Vector3.MoveTowards(platformTransform.localPosition, nextPos, movementSpeed * Time.deltaTime);
 
-        //Checks if we need to change destitaion from a to b or b to a
+        //Checks if we need to change destination from a to b or b to a
         if (Vector3.Distance(platformTransform.localPosition, nextPos) <= 0.1)
         {
             ChangeDestination();

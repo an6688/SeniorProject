@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TMP_Text candyText;
 
-    private int collectedCandy;
+    public int collectedCandy;
 
     public static GameManager Instance
     {
@@ -52,4 +53,6 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < candyPrefabs.Length; i++)
             candies[i] = Instantiate(candyPrefabs[i]);*/
     }
+
+    
 }

@@ -13,10 +13,10 @@ public class LayerBehavior : StateMachineBehaviour
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetLayerWeight(1) == 0 && animator.gameObject.layer != 10)
+        /*if (animator.GetLayerWeight(1) == 0 && animator.gameObject.layer != 10)
         {
             animator.gameObject.layer = 0;
-        }
+        }*/
     }
 
     // OnStateExit is called before OnStateExit is called on any state inside this state machine
