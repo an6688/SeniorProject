@@ -5417,7 +5417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &671980107
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6782,8 +6782,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resumeButton: {fileID: 0}
-  mainMenuScene: UI_Scene
   pauseMenu: {fileID: 2030574665}
+  mainMenuScene: UI_Scene
   isPaused: 0
 --- !u!114 &970786715
 MonoBehaviour:
@@ -8612,7 +8612,7 @@ GameObject:
   - component: {fileID: 1203960966}
   - component: {fileID: 1203960965}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: CandyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9899,11 +9899,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1309558917870210, guid: fba1f217ee7537a458f1da498143be41, type: 3}
       propertyPath: m_Name
-      value: new_btn
+      value: save
       objectReference: {fileID: 0}
     - target: {fileID: 1309558917870210, guid: fba1f217ee7537a458f1da498143be41, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
@@ -9913,7 +9913,7 @@ PrefabInstance:
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
@@ -9924,7 +9924,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 187145763}
+      objectReference: {fileID: 1950890385}
+    - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -9933,12 +9938,17 @@ PrefabInstance:
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadScene
+      value: Save
       objectReference: {fileID: 0}
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
@@ -9948,7 +9958,12 @@ PrefabInstance:
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Ui_Scene
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 114256927078256358, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
@@ -9958,7 +9973,7 @@ PrefabInstance:
     - target: {fileID: 114564802854147846, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_text
-      value: New Game
+      value: Save
       objectReference: {fileID: 0}
     - target: {fileID: 114564802854147846, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
@@ -10108,12 +10123,12 @@ PrefabInstance:
     - target: {fileID: 224328791829359912, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 6.7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224328791829359912, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -336.3
+      value: -395
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fba1f217ee7537a458f1da498143be41, type: 3}
@@ -11678,12 +11693,12 @@ PrefabInstance:
     - target: {fileID: 224328791829359912, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224328791829359912, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -310
+      value: -302
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fba1f217ee7537a458f1da498143be41, type: 3}
@@ -12327,7 +12342,7 @@ PrefabInstance:
     - target: {fileID: 224328791829359912, guid: fba1f217ee7537a458f1da498143be41,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -429
+      value: -497
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fba1f217ee7537a458f1da498143be41, type: 3}
@@ -13497,8 +13512,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resumeButton: {fileID: 574846993}
-  mainMenuScene: Ui_Scene
   pauseMenu: {fileID: 671980106}
+  mainMenuScene: Ui_Scene
   isPaused: 0
 --- !u!1 &1962313663
 GameObject:

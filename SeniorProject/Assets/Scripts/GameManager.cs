@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TMP_Text candyText;
 
-    public int collectedCandy;
+    [SerializeField] public int collectedCandy;
 
     public static GameManager Instance
     {

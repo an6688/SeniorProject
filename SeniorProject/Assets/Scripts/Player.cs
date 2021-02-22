@@ -6,11 +6,6 @@ public delegate void DeadEventHandler();
 public class Player : Character // using inheritence to give functionality from one to another
 {
     private static Player instance;
-
-    public event DeadEventHandler Dead;
-
-    [SerializeField] public Stat healthStat;
-
     public static Player Instance
     {
         get
@@ -23,6 +18,15 @@ public class Player : Character // using inheritence to give functionality from 
             return instance;
         }
     }
+
+    public event DeadEventHandler Dead;
+
+    private SpriteRenderer spriteRenderer;
+    public Rigidbody2D MyRigidBody { get; set; }
+
+    private Vector2 startPos;
+
+    [SerializeField] public Stat healthStat;
 
     [SerializeField] private Transform[] groundPoints;
 
@@ -39,17 +43,9 @@ public class Player : Character // using inheritence to give functionality from 
     private bool run;
 
     private bool immortal = false;
-
-    private SpriteRenderer spriteRenderer;
-
-    public Rigidbody2D MyRigidBody { get; set; }
-
     public bool Jump { get; set; }
     public bool Run { get; set; }
     public bool OnGround { get; set; }
-
-    private Vector2 startPos;
-
     public override bool isDead
     {
         get
@@ -86,7 +82,6 @@ public class Player : Character // using inheritence to give functionality from 
         MyRigidBody = GetComponent<Rigidbody2D>();
         healthStat.Initialize();
     }
-
 
     void Update()
     {
