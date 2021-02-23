@@ -72,3 +72,8 @@ crashlytics-build.properties
 [Aa]ssets/[Ss]treamingAssets/aa/*
 SeniorProject/Temp/UnityLockfile
 sharedassets0.assets.resS
+*.assets
+*.meta
+*.resS
+*.resS
+*.dll

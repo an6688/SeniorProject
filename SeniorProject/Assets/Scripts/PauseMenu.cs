@@ -91,6 +91,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Save()
     {
+        // C:\Users\jen\AppData\LocalLow\Spooky Halloween Game 2021\Broomwhacked
         Debug.Log("saving!!");
         FileStream file = new FileStream(Application.persistentDataPath + "/Player.dat", FileMode.OpenOrCreate);
         try

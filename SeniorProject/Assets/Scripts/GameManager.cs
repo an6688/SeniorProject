@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // this class should really be called CandyManager... 
     private static GameManager instance;
     
     [SerializeField] public GameObject candyPrefab;
@@ -45,14 +47,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
     // Instantiate the Prefab somewhere between -10.0 and 10.0 on the x-z plane
     void Start()
     {
-        /*candies = new GameObject[candyPrefabs.Length];
-        for (int i = 0; i < candyPrefabs.Length; i++)
-            candies[i] = Instantiate(candyPrefabs[i]);*/
     }
+
 
     
 }

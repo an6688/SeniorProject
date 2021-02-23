@@ -40,6 +40,8 @@ public class Player : Character // using inheritence to give functionality from 
     
     [SerializeField] private float immortalTime;
 
+    [SerializeField] GameObject DeathUI;
+
     private bool run;
 
     private bool immortal = false;
@@ -68,6 +70,11 @@ public class Player : Character // using inheritence to give functionality from 
 
     public override void Death()
     {
+        Debug.Log("you died!!");
+        DeathUI.gameObject.SetActive(true);
+
+        PlayfabManager.SendLeaderboard(GameManager.Instance.collectedCandy); // or is it CollectedCandy?
+
         MyRigidBody.velocity = Vector2.zero;
         MyAnimator.SetTrigger("idle");
         healthStat.CurrentVal = healthStat.MaxVal;
