@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Halloween 2D Asset Pack/Scenes/Ui_Scene.unity
     guid: dab8d61b8485fc648831fcfddee0819b
   - enabled: 1

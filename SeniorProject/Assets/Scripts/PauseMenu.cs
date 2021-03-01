@@ -93,7 +93,7 @@ public class PauseMenu : MonoBehaviour
     {
         // C:\Users\jen\AppData\LocalLow\Spooky Halloween Game 2021\Broomwhacked
         Debug.Log("saving!!");
-        FileStream file = new FileStream(Application.persistentDataPath + "/Player.dat", FileMode.OpenOrCreate);
+        FileStream file = new FileStream(Application.persistentDataPath + "/Player2.dat", FileMode.OpenOrCreate);
         try
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -112,7 +112,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Load()
     {
-        FileStream file = new FileStream(Application.persistentDataPath + "/Player.dat", FileMode.Open);
+        FileStream file = new FileStream(Application.persistentDataPath + "/Player2.dat", FileMode.Open);
 
         try
         {
