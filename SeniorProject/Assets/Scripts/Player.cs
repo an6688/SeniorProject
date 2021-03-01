@@ -229,13 +229,13 @@ public class Player : Character // using inheritence to give functionality from 
         }
     }
 
-    public override void ThrowKnife(int value)
-    {
-        if (!OnGround && value == 1 || OnGround && value == 0)
-        {
-            base.ThrowKnife(value);
-        }
-    }
+    //public override void ThrowKnife(int value)
+    //{
+    //    if (!OnGround && value == 1 || OnGround && value == 0)
+    //    {
+    //        base.ThrowKnife(value);
+    //    }
+    //}
 
     private IEnumerator IndicateImmortal()
     {

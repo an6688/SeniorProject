@@ -5,6 +5,7 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class PlayfabManager : MonoBehaviour
 {
@@ -136,5 +137,14 @@ public class PlayfabManager : MonoBehaviour
             Debug.Log(string.Format("PLACE: {0} | ID: {1} | VALUE: {2}", 
                 item.Position, item.PlayFabId, item.StatValue));
         }
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene("Game_Scene");
     }
 }

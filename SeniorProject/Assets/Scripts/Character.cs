@@ -22,10 +22,6 @@ public abstract class Character : MonoBehaviour
 
     [SerializeField] protected int health;
 
-    [SerializeField] private Transform knifePosition;
-
-    [SerializeField] private GameObject knifePrefab;
-
     /// A list of damage sources (tags that can damage the character)
     [SerializeField] private List<string> damageSources;
 
@@ -55,20 +51,6 @@ public abstract class Character : MonoBehaviour
         playerScale.x *= -1;
 
         transform.localScale = playerScale;
-    }
-
-    public virtual void ThrowKnife(int value)
-    {
-        if (facingRight) //If we are facing right then throw the knife to the right
-        {
-            GameObject tmp = (GameObject)Instantiate(knifePrefab, knifePosition.position, Quaternion.Euler(new Vector3(0, 0, -90)));
-            tmp.GetComponent<Knife>().Initialize(Vector2.right);
-        }
-        else //If we are facing to the lft then throw the knife to the left.
-        {
-            GameObject tmp = (GameObject)Instantiate(knifePrefab, knifePosition.position, Quaternion.Euler(new Vector3(0, 0, 90)));
-            tmp.GetComponent<Knife>().Initialize(Vector2.left);
-        }
     }
 
     public void MelleeAttack()

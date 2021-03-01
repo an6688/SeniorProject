@@ -13,6 +13,10 @@ public class Enemy : Character
 
     [SerializeField] private float throwRange;
 
+    [SerializeField] private Transform knifePosition;
+
+    [SerializeField] private GameObject knifePrefab;
+
     private Vector2 startPos;
 
     [SerializeField] private Transform leftEdge;
@@ -36,6 +40,21 @@ public class Enemy : Character
 
         LookAtTarget();
     }
+
+    public virtual void ThrowKnife(int value)
+    {
+        if (facingRight) //If we are facing right then throw the knife to the right
+        {
+            GameObject tmp = (GameObject)Instantiate(knifePrefab, knifePosition.position, Quaternion.Euler(new Vector3(0, 0, -90)));
+            tmp.GetComponent<Knife>().Initialize(Vector2.right);
+        }
+        else //If we are facing to the lft then throw the knife to the left.
+        {
+            GameObject tmp = (GameObject)Instantiate(knifePrefab, knifePosition.position, Quaternion.Euler(new Vector3(0, 0, 90)));
+            tmp.GetComponent<Knife>().Initialize(Vector2.left);
+        }
+    }
+
 
     public override IEnumerator TakeDamage()
     {

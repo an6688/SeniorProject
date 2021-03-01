@@ -14,8 +14,9 @@ public class mover : MonoBehaviour {
     public Transform Player;
     public bool canMoveY = false;
 
-    void Start () {
-        Automove.isOn = false;
+    void Start ()
+    {
+        if (Automove != null) Automove.isOn = false;
     }
     void OnTriggerEnter2D(Collider2D other){
         if (other.CompareTag("UnderwaterY"))
@@ -27,14 +28,16 @@ public class mover : MonoBehaviour {
 
     void LateUpdate () {
         //Move Left (if you are using different OS you can change KeyCode acording to your system
-        if (Input.GetKey (KeyCode.LeftArrow) && Player.position.x >= minDistanceX) {
+        if (Input.GetKey (KeyCode.LeftArrow) && Player.position.x >= minDistanceX)
+        {
             transform.position += Vector3.left * speed * damp;
-            Automove.isOn = false;
+            if (Automove != null) Automove.isOn = false;
         }
         //Move Right (if you are using different OS you can change KeyCode acording to your system
-        if (Input.GetKey (KeyCode.RightArrow) && Player.position.x <= maxDistanceX) {
+        if (Input.GetKey (KeyCode.RightArrow) && Player.position.x <= maxDistanceX)
+        {
             transform.position += Vector3.right * speed * damp;
-            Automove.isOn = false;
+            if (Automove != null) Automove.isOn = false;
         }
         //Move Down works only in Underwater Level (if you are using different OS you can change KeyCode acording to your system
         if (Input.GetKey (KeyCode.DownArrow) && Player.position.y >= minDistanceY && canMoveY) {
@@ -46,13 +49,13 @@ public class mover : MonoBehaviour {
             transform.position += Vector3.up * speed * damp;
             Automove.isOn = false;
         }
-        if (Automove.isOn && Player.position.x <= maxDistanceX) {
+        if (Automove != null && (Automove.isOn && Player.position.x <= maxDistanceX)) {
             transform.position += Vector3.right * speed * damp;
         }
-        if (Automove.isOn == false) {
+        if (Automove != null && Automove.isOn == false) {
             transform.position += Vector3.right * 0 * damp;
         }
-        if (Automove.isOn && Player.position.y >= minDistanceY && canMoveY) {
+        if (Automove != null && (Automove.isOn && Player.position.y >= minDistanceY && canMoveY)) {
             transform.position += Vector3.down * speed * damp;
         }
     }

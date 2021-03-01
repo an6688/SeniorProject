@@ -53,8 +53,6 @@ public class PauseMenu : MonoBehaviour
                 Time.timeScale = 0f;
             }
         }
-
-
     }
 
     public void Continue()
@@ -83,49 +81,49 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(mainMenuScene);
     }
 
-    public void Awake()
-    {
-        _gameManager = GameObject.FindObjectOfType<GameManager>();
-        Load();
-    }
+    //public void Awake()
+    //{
+    //    _gameManager = GameObject.FindObjectOfType<GameManager>();
+    //    Load();
+    //}
 
-    public void Save()
-    {
-        // C:\Users\jen\AppData\LocalLow\Spooky Halloween Game 2021\Broomwhacked
-        Debug.Log("saving!!");
-        FileStream file = new FileStream(Application.persistentDataPath + "/Player2.dat", FileMode.OpenOrCreate);
-        try
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
+    //public void Save()
+    //{
+    //    // C:\Users\jen\AppData\LocalLow\Spooky Halloween Game 2021\Broomwhacked
+    //    Debug.Log("saving!!");
+    //    FileStream file = new FileStream(Application.persistentDataPath + "/Player2.dat", FileMode.OpenOrCreate);
+    //    try
+    //    {
+    //        BinaryFormatter formatter = new BinaryFormatter();
 
-            formatter.Serialize(file, _gameManager.collectedCandy);
-        }
-        catch (SerializationException e)
-        {
-            Debug.LogError("there was an issue serializing the data! " + e.Message);
-        }
-        finally
-        {
-            file.Close();
-        }
-    }
+    //        formatter.Serialize(file, _gameManager.collectedCandy);
+    //    }
+    //    catch (SerializationException e)
+    //    {
+    //        Debug.LogError("there was an issue serializing the data! " + e.Message);
+    //    }
+    //    finally
+    //    {
+    //        file.Close();
+    //    }
+    //}
 
-    public void Load()
-    {
-        FileStream file = new FileStream(Application.persistentDataPath + "/Player2.dat", FileMode.Open);
+    //public void Load()
+    //{
+    //    FileStream file = new FileStream(Application.persistentDataPath + "/Player2.dat", FileMode.Open);
 
-        try
-        {
-            BinaryFormatter formatter = new BinaryFormatter();
-            _gameManager.collectedCandy = (int) formatter.Deserialize(file);
-        }
-        catch (SerializationException e)
-        {
-            Debug.LogError("error deserializing data! " + e.Message);
-        }
-        finally
-        {
-            file.Close();
-        }
-    }
+    //    try
+    //    {
+    //        BinaryFormatter formatter = new BinaryFormatter();
+    //        _gameManager.collectedCandy = (int) formatter.Deserialize(file);
+    //    }
+    //    catch (SerializationException e)
+    //    {
+    //        Debug.LogError("error deserializing data! " + e.Message);
+    //    }
+    //    finally
+    //    {
+    //        file.Close();
+    //    }
+    //}
 }
