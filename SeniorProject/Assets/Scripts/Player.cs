@@ -172,6 +172,7 @@ public class Player : Character // using inheritence to give functionality from 
         {
             // Attack = true; 
             MyAnimator.SetTrigger("attack");
+            GetComponent<AudioSource>().Play();
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -282,6 +283,11 @@ public class Player : Character // using inheritence to give functionality from 
         {
             GameManager.Instance.CollectedCandy++;
             Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.tag == "Cauldron")
+        {
+            healthStat.CurrentVal = healthStat.MaxVal;
         }
     }
 }

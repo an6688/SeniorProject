@@ -65,6 +65,8 @@ public class Enemy : Character
         }
         else
         {
+            GetComponent<AudioSource>().Play();
+
             if (dropItem)
             {
                 GameObject candy = (GameObject)Instantiate(GameManager.Instance.CandyPrefabs,
