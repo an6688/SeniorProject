@@ -289,5 +289,11 @@ public class Player : Character // using inheritence to give functionality from 
         {
             healthStat.CurrentVal = healthStat.MaxVal;
         }
+
+        if (other.gameObject.tag == "Portal")
+        {
+            DeathUI.gameObject.SetActive(true);
+            PlayfabManager.SendLeaderboard(GameManager.Instance.collectedCandy);
+        }
     }
 }

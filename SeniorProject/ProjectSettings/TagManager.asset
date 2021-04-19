@@ -12,6 +12,7 @@ TagManager:
   - Candy
   - MovingPlatform
   - Cauldron
+  - Portal
   layers:
   - Default
   - TransparentFX
