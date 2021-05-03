@@ -6,6 +6,10 @@ public delegate void DeadEventHandler();
 public class Player : Character // using inheritence to give functionality from one to another
 {
     private static Player instance;
+
+    public AudioSource broomWhack;
+    public AudioSource collectCandy;
+
     public static Player Instance
     {
         get
@@ -88,6 +92,9 @@ public class Player : Character // using inheritence to give functionality from 
         spriteRenderer = GetComponent<SpriteRenderer>();
         MyRigidBody = GetComponent<Rigidbody2D>();
         healthStat.Initialize();
+        AudioSource[] audios = GetComponents<AudioSource>();
+        broomWhack = audios[0];
+        collectCandy = audios[1];
     }
 
     void Update()
@@ -172,7 +179,8 @@ public class Player : Character // using inheritence to give functionality from 
         {
             // Attack = true; 
             MyAnimator.SetTrigger("attack");
-            GetComponent<AudioSource>().Play();
+            // GetComponent<AudioSource>().Play();
+            broomWhack.Play();
         }
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -281,6 +289,7 @@ public class Player : Character // using inheritence to give functionality from 
     {
         if (other.gameObject.tag == "Candy")
         {
+            collectCandy.Play();
             GameManager.Instance.CollectedCandy++;
             Destroy(other.gameObject);
         }

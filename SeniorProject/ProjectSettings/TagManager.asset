@@ -13,6 +13,7 @@ TagManager:
   - MovingPlatform
   - Cauldron
   - Portal
+  - Ground
   layers:
   - Default
   - TransparentFX
